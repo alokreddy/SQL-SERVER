@@ -1,0 +1,12 @@
+SELECT * FROM Employees ORDER BY Salary DESC
+
+WITH Result AS
+
+  (
+  SELECT Salary, DENSE_RANK() over (ORDER BY Salary DESC) AS denserank
+  FROM Employees
+  )
+  
+SELECT salary
+FROM Result
+WHERE Result.denserank = 1
